@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "server",
-    "client"
+    "client",
+    "client-to-remote-demo"
 ]
 resolver = "2"

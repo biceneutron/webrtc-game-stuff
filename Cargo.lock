@@ -441,6 +441,7 @@ dependencies = [
 name = "client"
 version = "0.1.0"
 dependencies = [
+ "base64 0.21.2",
  "bytes",
  "clap",
  "env_logger",
@@ -449,9 +450,30 @@ dependencies = [
  "log",
  "regex",
  "reqwest",
+ "serde_json",
  "tinyjson",
  "tokio",
- "webrtc",
+ "webrtc 0.8.0",
+ "webrtc-unreliable 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "client-to-remote-demo"
+version = "0.1.0"
+dependencies = [
+ "base64 0.21.2",
+ "bytes",
+ "clap",
+ "env_logger",
+ "futures",
+ "hyper",
+ "log",
+ "regex",
+ "reqwest",
+ "serde_json",
+ "tinyjson",
+ "tokio",
+ "webrtc 0.8.0",
  "webrtc-unreliable 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -1231,6 +1253,23 @@ dependencies = [
 [[package]]
 name = "interceptor"
 version = "0.9.0"
+dependencies = [
+ "async-trait",
+ "bytes",
+ "log",
+ "rand",
+ "rtcp 0.9.0",
+ "rtp 0.8.0",
+ "thiserror",
+ "tokio",
+ "waitgroup",
+ "webrtc-srtp 0.10.0",
+ "webrtc-util 0.7.0",
+]
+
+[[package]]
+name = "interceptor"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c142385498b53584546abbfa50188b2677af8e4f879da1ee5d905cb7de5b97a"
 dependencies = [
@@ -1238,13 +1277,13 @@ dependencies = [
  "bytes",
  "log",
  "rand",
- "rtcp",
- "rtp",
+ "rtcp 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rtp 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "tokio",
  "waitgroup",
- "webrtc-srtp",
- "webrtc-util",
+ "webrtc-srtp 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1338,6 +1377,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "memoffset"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5de893c32cde5f383baa4c04c5d6dbdd735cfd4a794b0debdb2bb1b421da5ff4"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
 name = "mime"
 version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1396,7 +1444,21 @@ dependencies = [
  "bitflags",
  "cfg-if 1.0.0",
  "libc",
- "memoffset",
+ "memoffset 0.6.5",
+]
+
+[[package]]
+name = "nix"
+version = "0.26.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bfdda3d196821d6af13126e40375cdf7da646a96114af134d5f417a9a1dc8e1a"
+dependencies = [
+ "bitflags",
+ "cfg-if 1.0.0",
+ "libc",
+ "memoffset 0.7.1",
+ "pin-utils",
+ "static_assertions",
 ]
 
 [[package]]
@@ -1855,12 +1917,32 @@ dependencies = [
 [[package]]
 name = "rtcp"
 version = "0.9.0"
+dependencies = [
+ "bytes",
+ "thiserror",
+ "webrtc-util 0.7.0",
+]
+
+[[package]]
+name = "rtcp"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6423493804221c276d27f3cc383cd5cbe1a1f10f210909fd4951b579b01293cd"
 dependencies = [
  "bytes",
  "thiserror",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "rtp"
+version = "0.8.0"
+dependencies = [
+ "bytes",
+ "rand",
+ "serde",
+ "thiserror",
+ "webrtc-util 0.7.0",
 ]
 
 [[package]]
@@ -1873,7 +1955,7 @@ dependencies = [
  "rand",
  "serde",
  "thiserror",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1956,6 +2038,16 @@ checksum = "b362b83898e0e69f38515b82ee15aa80636befe47c3b6d3d89a911e78fc228ce"
 dependencies = [
  "ring",
  "untrusted",
+]
+
+[[package]]
+name = "sdp"
+version = "0.5.3"
+dependencies = [
+ "rand",
+ "substring",
+ "thiserror",
+ "url",
 ]
 
 [[package]]
@@ -2070,7 +2162,7 @@ dependencies = [
  "reqwest",
  "tinyjson",
  "tokio",
- "webrtc",
+ "webrtc 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "webrtc-unreliable 0.5.3 (git+https://github.com/biceneutron/webrtc-unreliable.git?branch=ssl-hack)",
 ]
 
@@ -2166,10 +2258,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "static_assertions"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+
+[[package]]
 name = "strsim"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
+
+[[package]]
+name = "stun"
+version = "0.4.4"
+dependencies = [
+ "base64 0.21.2",
+ "crc",
+ "lazy_static",
+ "md-5",
+ "rand",
+ "ring",
+ "subtle",
+ "thiserror",
+ "tokio",
+ "url",
+ "webrtc-util 0.7.0",
+]
 
 [[package]]
 name = "stun"
@@ -2187,7 +2302,7 @@ dependencies = [
  "thiserror",
  "tokio",
  "url",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -2426,6 +2541,23 @@ checksum = "3528ecfd12c466c6f163363caf2d02a71161dd5e1cc6ae7b34207ea2d42d81ed"
 [[package]]
 name = "turn"
 version = "0.6.1"
+dependencies = [
+ "async-trait",
+ "base64 0.21.2",
+ "futures",
+ "log",
+ "md-5",
+ "rand",
+ "ring",
+ "stun 0.4.4",
+ "thiserror",
+ "tokio",
+ "webrtc-util 0.7.0",
+]
+
+[[package]]
+name = "turn"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4712ee30d123ec7ae26d1e1b218395a16c87cdbaf4b3925d170d684af62ea5e8"
 dependencies = [
@@ -2436,10 +2568,10 @@ dependencies = [
  "md-5",
  "rand",
  "ring",
- "stun",
+ "stun 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "tokio",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -2648,6 +2780,47 @@ dependencies = [
 [[package]]
 name = "webrtc"
 version = "0.8.0"
+dependencies = [
+ "arc-swap",
+ "async-trait",
+ "bytes",
+ "cfg-if 0.1.10",
+ "hex",
+ "interceptor 0.9.0",
+ "lazy_static",
+ "log",
+ "rand",
+ "rcgen",
+ "regex",
+ "ring",
+ "rtcp 0.9.0",
+ "rtp 0.8.0",
+ "rustls",
+ "sdp 0.5.3",
+ "serde",
+ "serde_json",
+ "sha2",
+ "smol_str",
+ "stun 0.4.4",
+ "thiserror",
+ "time",
+ "tokio",
+ "turn 0.6.1",
+ "url",
+ "waitgroup",
+ "webrtc-data 0.7.0",
+ "webrtc-dtls 0.7.2",
+ "webrtc-ice 0.9.1",
+ "webrtc-mdns 0.5.2",
+ "webrtc-media 0.6.1",
+ "webrtc-sctp 0.8.0",
+ "webrtc-srtp 0.10.0",
+ "webrtc-util 0.7.0",
+]
+
+[[package]]
+name = "webrtc"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f60dde9fd592872bc371b3842e4616bc4c6984242e3cd2a7d7cb771db278601b"
 dependencies = [
@@ -2656,36 +2829,48 @@ dependencies = [
  "bytes",
  "cfg-if 0.1.10",
  "hex",
- "interceptor",
+ "interceptor 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lazy_static",
  "log",
  "rand",
  "rcgen",
  "regex",
  "ring",
- "rtcp",
- "rtp",
+ "rtcp 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rtp 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "rustls",
- "sdp",
+ "sdp 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
  "serde_json",
  "sha2",
  "smol_str",
- "stun",
+ "stun 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "time",
  "tokio",
- "turn",
+ "turn 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "url",
  "waitgroup",
- "webrtc-data",
- "webrtc-dtls",
- "webrtc-ice",
- "webrtc-mdns",
- "webrtc-media",
- "webrtc-sctp",
- "webrtc-srtp",
- "webrtc-util",
+ "webrtc-data 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-dtls 0.7.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-ice 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-mdns 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-media 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-sctp 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-srtp 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "webrtc-data"
+version = "0.7.0"
+dependencies = [
+ "bytes",
+ "log",
+ "thiserror",
+ "tokio",
+ "webrtc-sctp 0.8.0",
+ "webrtc-util 0.7.0",
 ]
 
 [[package]]
@@ -2699,8 +2884,43 @@ dependencies = [
  "log",
  "thiserror",
  "tokio",
- "webrtc-sctp",
- "webrtc-util",
+ "webrtc-sctp 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "webrtc-dtls"
+version = "0.7.2"
+dependencies = [
+ "aes 0.6.0",
+ "aes-gcm",
+ "async-trait",
+ "bincode",
+ "block-modes",
+ "byteorder",
+ "ccm",
+ "der-parser 8.2.0",
+ "hkdf",
+ "hmac",
+ "log",
+ "p256",
+ "p384",
+ "rand",
+ "rand_core 0.6.4",
+ "rcgen",
+ "ring",
+ "rustls",
+ "sec1",
+ "serde",
+ "sha1",
+ "sha2",
+ "subtle",
+ "thiserror",
+ "tokio",
+ "webpki",
+ "webrtc-util 0.7.0",
+ "x25519-dalek",
+ "x509-parser 0.13.2",
 ]
 
 [[package]]
@@ -2738,9 +2958,31 @@ dependencies = [
  "thiserror",
  "tokio",
  "webpki",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "x25519-dalek",
  "x509-parser 0.13.2",
+]
+
+[[package]]
+name = "webrtc-ice"
+version = "0.9.1"
+dependencies = [
+ "arc-swap",
+ "async-trait",
+ "crc",
+ "log",
+ "rand",
+ "serde",
+ "serde_json",
+ "stun 0.4.4",
+ "thiserror",
+ "tokio",
+ "turn 0.6.1",
+ "url",
+ "uuid",
+ "waitgroup",
+ "webrtc-mdns 0.5.2",
+ "webrtc-util 0.7.0",
 ]
 
 [[package]]
@@ -2756,15 +2998,26 @@ dependencies = [
  "rand",
  "serde",
  "serde_json",
- "stun",
+ "stun 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "tokio",
- "turn",
+ "turn 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "url",
  "uuid",
  "waitgroup",
- "webrtc-mdns",
- "webrtc-util",
+ "webrtc-mdns 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "webrtc-mdns"
+version = "0.5.2"
+dependencies = [
+ "log",
+ "socket2",
+ "thiserror",
+ "tokio",
+ "webrtc-util 0.7.0",
 ]
 
 [[package]]
@@ -2777,7 +3030,18 @@ dependencies = [
  "socket2",
  "thiserror",
  "tokio",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "webrtc-media"
+version = "0.6.1"
+dependencies = [
+ "byteorder",
+ "bytes",
+ "rand",
+ "rtp 0.8.0",
+ "thiserror",
 ]
 
 [[package]]
@@ -2789,8 +3053,23 @@ dependencies = [
  "byteorder",
  "bytes",
  "rand",
- "rtp",
+ "rtp 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
+]
+
+[[package]]
+name = "webrtc-sctp"
+version = "0.8.0"
+dependencies = [
+ "arc-swap",
+ "async-trait",
+ "bytes",
+ "crc",
+ "log",
+ "rand",
+ "thiserror",
+ "tokio",
+ "webrtc-util 0.7.0",
 ]
 
 [[package]]
@@ -2807,7 +3086,28 @@ dependencies = [
  "rand",
  "thiserror",
  "tokio",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "webrtc-srtp"
+version = "0.10.0"
+dependencies = [
+ "aead 0.4.3",
+ "aes 0.7.5",
+ "aes-gcm",
+ "byteorder",
+ "bytes",
+ "ctr 0.8.0",
+ "hmac",
+ "log",
+ "rtcp 0.9.0",
+ "rtp 0.8.0",
+ "sha1",
+ "subtle",
+ "thiserror",
+ "tokio",
+ "webrtc-util 0.7.0",
 ]
 
 [[package]]
@@ -2824,13 +3124,13 @@ dependencies = [
  "ctr 0.8.0",
  "hmac",
  "log",
- "rtcp",
- "rtp",
+ "rtcp 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rtp 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "sha1",
  "subtle",
  "thiserror",
  "tokio",
- "webrtc-util",
+ "webrtc-util 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -2871,6 +3171,25 @@ dependencies = [
 [[package]]
 name = "webrtc-util"
 version = "0.7.0"
+dependencies = [
+ "async-trait",
+ "bitflags",
+ "bytes",
+ "cc",
+ "ipnet",
+ "lazy_static",
+ "libc",
+ "log",
+ "nix 0.26.2",
+ "rand",
+ "thiserror",
+ "tokio",
+ "winapi",
+]
+
+[[package]]
+name = "webrtc-util"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "93f1db1727772c05cf7a2cfece52c3aca8045ca1e176cd517d323489aa3c6d87"
 dependencies = [
@@ -2882,7 +3201,7 @@ dependencies = [
  "lazy_static",
  "libc",
  "log",
- "nix",
+ "nix 0.24.3",
  "rand",
  "thiserror",
  "tokio",
