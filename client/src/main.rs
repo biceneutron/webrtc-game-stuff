@@ -10,6 +10,7 @@ use webrtc::{
     data::data_channel::DataChannel,
     data_channel::{
         data_channel_init::RTCDataChannelInit, data_channel_message::DataChannelMessage,
+        RTCDataChannel,
     },
     dtls_transport::dtls_role::DTLSRole,
     error::Error as RTCError,
@@ -39,7 +40,7 @@ async fn main() -> Result<(), RTCError> {
         )
         .get_matches();
 
-    env_logger::init_from_env(env_logger::Env::new().default_filter_or("trace"));
+    env_logger::init_from_env(env_logger::Env::new().default_filter_or("debug"));
     log::debug!("Client running!");
     //
     // get args
@@ -62,7 +63,7 @@ async fn main() -> Result<(), RTCError> {
     // create a SettingEngine and enable Detach
     let mut setting_engine = SettingEngine::default();
     setting_engine.set_srtp_protection_profiles(vec![]);
-    setting_engine.detach_data_channels();
+    // setting_engine.detach_data_channels();
     setting_engine.set_ice_multicast_dns_mode(MulticastDnsMode::Disabled);
     setting_engine
         .set_answering_dtls_role(DTLSRole::Client)
@@ -217,7 +218,7 @@ async fn main() -> Result<(), RTCError> {
         .await
         .expect("cannot create offer");
 
-    log::debug!("offer {}", offer.sdp);
+    // log::debug!("offer {}", offer.sdp);
 
     // sets the LocalDescription, and starts our UDP listeners
     peer_connection
@@ -230,7 +231,7 @@ async fn main() -> Result<(), RTCError> {
 
     let sdp: String = peer_connection.local_description().await.unwrap().sdp;
 
-    // log::debug!("sdp {}", sdp);
+    // // log::debug!("sdp {}", sdp);
 
     let sdp_len = sdp.len();
 
@@ -256,8 +257,8 @@ async fn main() -> Result<(), RTCError> {
     // parse session from server response
     let session_response: JsSessionResponse = get_session_response(response_string.as_str());
 
-    log::debug!("answer {}", session_response.answer.sdp);
-    log::debug!("candidate {}", session_response.candidate.candidate);
+    // // log::debug!("answer {}", session_response.answer.sdp);
+    // // log::debug!("candidate {}", session_response.candidate.candidate);
 
     // apply the server's response as the remote description
     let session_description = RTCSessionDescription::answer(session_response.answer.sdp).unwrap();
@@ -266,11 +267,6 @@ async fn main() -> Result<(), RTCError> {
         .set_remote_description(session_description)
         .await
         .expect("cannot set remote description");
-
-    // let addr_cell = AddrCell::default();
-    // addr_cell
-    //     .receive_candidate(session_response.candidate.candidate.as_str())
-    //     .await;
 
     // add ice candidate to connection
     if let Err(error) = peer_connection
@@ -286,6 +282,7 @@ async fn main() -> Result<(), RTCError> {
         panic!("Error during add_ice_candidate: {:?}", error);
     }
 
+    // println!("Press ctrl-c to stop");
     // tokio::select! {
     //     _ = done_rx.recv() => {
     //         println!("received done signal!");
@@ -294,6 +291,8 @@ async fn main() -> Result<(), RTCError> {
     //         println!();
     //     }
     // };
+    // peer_connection.close().await?;
+    // Ok(())
 
     loop {}
 }
