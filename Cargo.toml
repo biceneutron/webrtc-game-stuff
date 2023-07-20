@@ -2,6 +2,8 @@
 members = [
     "server",
     "client",
-    "client-to-remote-demo"
+    "client-to-remote-demo",
+    "client-to-rs-server",
+    "str0m-client"
 ]
 resolver = "2"
