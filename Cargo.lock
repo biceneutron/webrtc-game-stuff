@@ -450,6 +450,7 @@ dependencies = [
  "log",
  "regex",
  "reqwest",
+ "serde",
  "serde_json",
  "tinyjson",
  "tokio",
@@ -470,6 +471,27 @@ dependencies = [
  "log",
  "regex",
  "reqwest",
+ "serde_json",
+ "tinyjson",
+ "tokio",
+ "webrtc 0.8.0",
+ "webrtc-unreliable 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "client-to-rs-server"
+version = "0.1.0"
+dependencies = [
+ "base64 0.21.2",
+ "bytes",
+ "clap",
+ "env_logger",
+ "futures",
+ "hyper",
+ "log",
+ "regex",
+ "reqwest",
+ "serde",
  "serde_json",
  "tinyjson",
  "tokio",
@@ -2262,6 +2284,27 @@ name = "static_assertions"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+
+[[package]]
+name = "str0m-client"
+version = "0.1.0"
+dependencies = [
+ "base64 0.21.2",
+ "bytes",
+ "clap",
+ "env_logger",
+ "futures",
+ "hyper",
+ "log",
+ "regex",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tinyjson",
+ "tokio",
+ "webrtc 0.8.0",
+ "webrtc-unreliable 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "strsim"
