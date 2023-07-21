@@ -1,9 +1,10 @@
 [workspace]
 members = [
-    "server",
-    "client",
+    "webrtc-unreliable/server",
+    "webrtc-unreliable/client",
     "client-to-remote-demo",
     "client-to-rs-server",
-    "str0m-client"
+    "str0m/client",
+    "str0m/server"
 ]
 resolver = "2"

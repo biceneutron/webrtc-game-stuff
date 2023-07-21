@@ -299,6 +299,8 @@ async fn main() -> Result<(), RTCError> {
         }
     }
 
+    println!("########### candidate: {}", candidate.clone().unwrap());
+
     // let mut cand = Option::None;
 
     // let candidate = .attr

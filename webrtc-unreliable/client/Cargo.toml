@@ -1,5 +1,5 @@
 [package]
-name = "str0m-client"
+name = "webrtc-rs-client"
 version = "0.1.0"
 edition = "2021"
 
@@ -14,7 +14,7 @@ hyper = { version = "0.14", features = ["http1", "runtime", "server", "stream"] 
 tokio = { version = "1.0", features = ["macros", "net", "rt-multi-thread"] }
 log = "0.4"
 # webrtc = "0.8.0"
-webrtc = { path = "../../webrtc/webrtc" }
+webrtc = { path = "../../../webrtc/webrtc" }
 reqwest = "0.11.18"
 tinyjson = "2.5.1"
 regex = "1.9.1"
